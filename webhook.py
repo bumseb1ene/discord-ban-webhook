@@ -25,17 +25,17 @@ CHECK_INTERVAL = int(os.getenv('CHECK_INTERVAL', 60))  # Standardwert ist 60 Sek
 selected_language = os.getenv('LANGUAGE', 'de')
 
 class BanChecker:
-    def __init__(self):
-        self.api_client = APIClient(API_BASE_URL, API_TOKEN)
+    def __init__(self, api_base_url, api_token):
+        self.api_client = APIClient(api_base_url, api_token)
         self.last_checked = self.read_last_checked_date()
 
     async def on_ready(self):
-
         if self.api_client.login(USERNAME, PASSWORD):
-            print("API Login erfolgreich!")
+            print(f"API Login erfolgreich für URL: {self.api_client.base_url}")
             await self.check_bans()  # Startet die Überprüfung von Bans
         else:
-            print("API Login fehlgeschlagen. Überprüfen Sie die Anmeldedaten.")
+            print(f"API Login fehlgeschlagen für URL: {self.api_client.base_url}. Überprüfen Sie die Anmeldedaten.")
+
 
     def read_last_checked_date(self):
         try:
@@ -189,5 +189,14 @@ class BanChecker:
 
 
 if __name__ == "__main__":
-    bot = BanChecker()
-    asyncio.run(bot.on_ready())
+    load_dotenv()
+
+    api_base_urls = os.getenv('API_BASE_URLS')
+    if api_base_urls:
+        api_base_urls = api_base_urls.split(',')
+    else:
+        api_base_urls = [os.getenv('API_BASE_URL')]  # Einzelne URL verwenden, wenn keine Liste vorhanden ist
+
+    for api_base_url in api_base_urls:
+        bot = BanChecker(api_base_url, os.getenv('API_TOKEN'))
+        asyncio.run(bot.on_ready())
