@@ -24,7 +24,7 @@ This script utilizes a Discord webhook to post information about new bans in a D
     API_TOKEN=YourAPIToken
     USERNAME=YourAPIUsername
     PASSWORD=YourAPIPassword
-    CHECK_INTERVAL=IntervalInSeconds
+    CHECK_INTERVAL=300
     LANGUAGE=en / de
     ```
 Replace the placeholders with your actual values.
