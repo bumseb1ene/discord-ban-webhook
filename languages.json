@@ -1,0 +1,38 @@
+{
+    "de": {
+        "new_ban": "☣️ Neuer Bann:",
+        "name": "Name:",
+        "steam_id": "SteamID/GP-ID:",
+        "ban_time": "Bannzeit:",
+        "on_blacklist": "Auf Blacklist:",
+        "yes": "Ja",
+        "no": "Nein",
+        "steam_url": "SteamURL:",
+        "total_playtime": "Gesamtspielzeit:",
+        "hours": "Stunden",
+        "minutes": "Minuten",
+        "reason": "Grund:",
+        "ban_enforced_by": "Bann - Verhängt durch:",
+        "ban_type": "Banntyp:",
+        "unknown": "Unbekannt",
+        "player_comments": "Beschreibung:"
+    },
+    "en": {
+        "new_ban": "☣️ New Ban:",
+        "name": "Name:",
+        "steam_id": "SteamID/GP-ID:",
+        "ban_time": "Ban Time:",
+        "on_blacklist": "On Blacklist:",
+        "yes": "Yes",
+        "no": "No",
+        "steam_url": "SteamURL:",
+        "total_playtime": "Total Playtime:",
+        "hours": "hours",
+        "minutes": "minutes",
+        "reason": "Reason:",
+        "ban_enforced_by": "Ban - Enforced by:",
+        "ban_type": "Ban Type:",
+        "unknown": "Unknown",
+        "player_comments": "Description:"
+    }
+}
