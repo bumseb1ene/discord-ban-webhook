@@ -2,7 +2,7 @@
     "de": {
         "new_ban": "☣️ Neuer Bann:",
         "name": "Name:",
-        "steam_id": "SteamID/GP-ID:",
+        "steam_id": "ID:",
         "ban_time": "Bannzeit:",
         "on_blacklist": "Auf Blacklist:",
         "yes": "Ja",
@@ -20,7 +20,7 @@
     "en": {
         "new_ban": "☣️ New Ban:",
         "name": "Name:",
-        "steam_id": "SteamID/GP-ID:",
+        "steam_id": "ID:",
         "ban_time": "Ban Time:",
         "on_blacklist": "On Blacklist:",
         "yes": "Yes",
