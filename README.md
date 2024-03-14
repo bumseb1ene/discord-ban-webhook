@@ -20,7 +20,7 @@ This script utilizes a Discord webhook to post information about new bans in a D
 3. Create a `.env` file in the same directory with the following content:
     ```bash
     DISCORD_WEBHOOK_URL=YourWebhookURL
-    API_BASE_URL=YourAPIBaseURL
+    API_BASE_URLS=YourAPIBaseURL1,YourAPIBaseURL2,YourAPIBaseURL3
     API_TOKEN=YourAPIToken
     USERNAME=YourAPIUsername
     PASSWORD=YourAPIPassword
