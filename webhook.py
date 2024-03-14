@@ -77,7 +77,6 @@ class BanChecker:
                 print(f"Ungültiges Datumformat für Ban: {ban['ban_time']}. Vollständiges Ban-Objekt: {ban}")
                 return False
         else:
-            print(f"Unvollständiges Ban-Objekt wird ignoriert. Vollständiges Ban-Objekt: {ban}")
             return False  # Unvollständige Objekte ignorieren
 
 
