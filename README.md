@@ -38,7 +38,7 @@ Replace the placeholders with your actual values.
 ## Configuration
 
 - `DISCORD_WEBHOOK_URL`: The webhook URL of your Discord channel.
-- `API_BASE_URL`: The base URL of the API used for retrieving ban information.
+- `API_BASE_URLS`: The base URL of the API used for retrieving ban information.
 - `API_TOKEN`: The token used for API authentication.
 - `USERNAME` and `PASSWORD`: Username and password for the API.
 - `CHECK_INTERVAL`: The interval in seconds at which the script checks for new bans.

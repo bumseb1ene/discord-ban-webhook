@@ -130,7 +130,7 @@ class BanChecker:
 
     async def post_ban_info(self, ban_info, player_info):
         # Laden der Spracheinstellungen
-        language = languages[os.getenv('LANGUAGE', 'de')]  # Lädt die Spracheinstellung aus .env
+        language = languages[os.getenv('LANGUAGE', 'de')]
 
         # Berechnung der Spielzeit in Stunden und Minuten
         total_playtime_seconds = player_info.get('total_playtime_seconds', 0)
@@ -139,17 +139,23 @@ class BanChecker:
 
         # Aktionen und Blacklist-Status extrahieren
         actions = player_info.get("received_actions", [])
-        blacklist = player_info.get("blacklist", {})
-        is_blacklisted = blacklist.get("is_blacklisted", False)
+        blacklist = player_info.get("blacklist", None)
+        is_blacklisted = blacklist is not None and blacklist.get("is_blacklisted", False)
 
-        # Banngrund
-        ban_reason = blacklist.get('reason', language['unknown']) if is_blacklisted else actions[0].get('reason', language['unknown']) if actions else language['unknown']
+        # Banngrund und Verantwortlicher für den Ban
+        ban_reason = language['unknown']
+        ban_enforced_by = language['unknown']
+        if is_blacklisted:
+            ban_reason = blacklist.get('reason', language['unknown'])
+            ban_enforced_by = blacklist.get('by', language['unknown'])
+        elif actions:
+            ban_reason = actions[0].get('reason', language['unknown'])
+            ban_enforced_by = actions[0].get('by', language['unknown'])
 
         # Bannzeit
         formatted_ban_time = language['unknown']
         if actions:
-            latest_action = actions[0]
-            action_time = latest_action.get('time', '')
+            action_time = actions[0].get('time', '')
             if action_time:
                 try:
                     ban_time = datetime.strptime(action_time, "%Y-%m-%dT%H:%M:%S.%f")
@@ -169,8 +175,8 @@ class BanChecker:
         message += f"**{language['steam_url']}** https://steamcommunity.com/profiles/{player_info.get('steam_id_64', language['unknown'])}\n"
         message += f"**{language['total_playtime']}** {hours} {language['hours']} und {minutes} {language['minutes']}\n"
         message += f"**{language['reason']}** {ban_reason}\n"
-        message += f"**{language['ban_enforced_by']}** {blacklist.get('by', language['unknown']) if is_blacklisted else latest_action.get('by', language['unknown'])}\n"
-        message += f"**{language['ban_type']}** {latest_action.get('action_type', language['unknown']) if actions else language['unknown']}\n"
+        message += f"**{language['ban_enforced_by']}** {ban_enforced_by}\n"
+        message += f"**{language['ban_type']}** {actions[0].get('action_type', language['unknown']) if actions else language['unknown']}\n"
 
         # Nur den neuesten Kommentar hinzufügen
         if player_comments:
@@ -183,6 +189,7 @@ class BanChecker:
         response = requests.post(WEBHOOK_URL, json={"content": message})
         if response.status_code != 204:
             print(f"Fehler beim Senden der Nachricht an den Webhook: {response.status_code}")
+
 
 
 
